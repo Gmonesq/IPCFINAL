@@ -1,2 +1,2 @@
 # IPCFINAL
-Trabajo final ipc
+Trabajo final IPC
