@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox stylesheets="@../resources/estilos.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.FXML_mapaController">
+   <children>
+      <HBox alignment="CENTER_RIGHT" fillHeight="false" spacing="5.0" VBox.vgrow="NEVER">
+         <children>
+            <MenuBar>
+              <menus>
+                <Menu mnemonicParsing="false" text="Fichero">
+                  <items>
+                    <MenuItem fx:id="cerrarFicheroMenu" mnemonicParsing="false" onAction="#handleOnActionCerrarAplicacion" text="Cerrar" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Editar">
+                  <items>
+                    <MenuItem fx:id="borrarMenu" mnemonicParsing="false" onAction="#handleOnActionBorrarMenu" text="Borrar" />
+                        <Menu mnemonicParsing="false" text="Perfil">
+                          <items>
+                            <MenuItem mnemonicParsing="false" onAction="#handleOnActionModificarPerfil" text="Modificar perfil" />
+                              <MenuItem mnemonicParsing="false" onAction="#handleOnActionLogOut" text="Log out" />
+                          </items>
+                           <graphic>
+                              <ImageView fx:id="profileImage" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                           </graphic>
+                        </Menu>
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Ayuda">
+                  <items>
+                    <MenuItem fx:id="acercaMenu" mnemonicParsing="false" onAction="#handleOnActionAcercaMenu" text="Acerca de" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+            <Region HBox.hgrow="ALWAYS" />
+            <Label text="Zoom" />
+            <Button mnemonicParsing="false" onAction="#zoomOut" text="-" />
+            <Slider fx:id="zoom_slider" HBox.hgrow="SOMETIMES" />
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#zoomIn" text="+" />
+         </children>
+         <VBox.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </VBox.margin>
+      </HBox>
+      <SplitPane dividerPositions="0.4431438127090301, 0.5" VBox.vgrow="ALWAYS">
+         <items>
+            <ListView fx:id="map_listview" onMouseClicked="#listClicked" prefHeight="399.0" prefWidth="87.0" />
+            <ToolBar orientation="VERTICAL" prefHeight="399.0" prefWidth="100.0">
+               <items>
+                  <VBox maxWidth="50.0" minWidth="50.0" prefHeight="200.0" prefWidth="50.0">
+                     <children>
+                          <ToggleButton fx:id="pointerBtn" minHeight="25.0" minWidth="50.0" onAction="#handleOnActionPointerBtn" selected="true">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/Cursor-image.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="btn" />
+                           </toggleGroup>
+                          </ToggleButton>
+                          <ToggleButton fx:id="pencilBtn" minHeight="25.0" minWidth="50.0" onAction="#handleOnActionPencilBtn" toggleGroup="$btn">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/Pencil-icon.jpg" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                          </ToggleButton>
+                        <ToggleButton fx:id="lineBtn" minHeight="25.0" minWidth="50.0" mnemonicParsing="false" onAction="#handleOnActionLineBtn" toggleGroup="$btn">
+                           <graphic>
+                              <ImageView fitHeight="56.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/Line-icon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets bottom="5.0" top="5.0" />
+                           </VBox.margin>
+                        </ToggleButton>
+                        <ToggleButton fx:id="arcBtn" minHeight="25.0" minWidth="50.0" mnemonicParsing="false" onAction="#handleOnActionArcBtn" toggleGroup="$btn">
+                           <graphic>
+                              <ImageView fitHeight="19.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/Arc-icon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </ToggleButton>
+                        <ToggleButton fx:id="eraserBtn" layoutX="10.0" layoutY="285.0" minHeight="25.0" minWidth="50.0" mnemonicParsing="false" onAction="#handleOnActionEraserBtn" toggleGroup="$btn">
+                           <graphic>
+                              <ImageView fitHeight="27.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/Eraser-icon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </ToggleButton>
+                        <ToggleButton fx:id="addTextBtn" layoutX="10.0" layoutY="195.0" minHeight="25.0" minWidth="50.0" mnemonicParsing="false" onAction="#handleOnActionAddTextBtn" toggleGroup="$btn">
+                           <graphic>
+                              <ImageView fitHeight="27.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/Text-icon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </ToggleButton>
+                        <ToggleButton fx:id="coordinatesBtn" layoutX="10.0" layoutY="251.0" minHeight="25.0" minWidth="50.0" mnemonicParsing="false" onAction="#handleOnActionCoordinatesBtn" toggleGroup="$btn">
+                           <graphic>
+                              <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/Coordinates-icon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </ToggleButton>
+                        <ToggleButton fx:id="latBtn" minHeight="25.0" minWidth="50.0" mnemonicParsing="false" onAction="#handleOnActionLatBtn" toggleGroup="$btn">
+                           <graphic>
+                              <ImageView fitHeight="23.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/20232.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </ToggleButton>
+                        <ToggleButton fx:id="bucketBtn" minHeight="25.0" minWidth="50.0" mnemonicParsing="false" onAction="#handleOnActionBucketBtn" toggleGroup="$btn">
+                           <graphic>
+                              <ImageView fitHeight="21.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/4534916.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </ToggleButton>
+                        <Separator prefWidth="100.0">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </Separator>
+                        <ColorPicker fx:id="pencilColor" minHeight="20.0" minWidth="50.0" onAction="#handleOnActionPencilColor">
+                           <VBox.margin>
+                              <Insets bottom="15.0" />
+                           </VBox.margin>
+                           <value>
+                              <Color />
+                           </value></ColorPicker>
+                        <Slider fx:id="sizePencil" blockIncrement="1.0" max="10.0" min="1.0" minHeight="15.0" minWidth="50.0" showTickLabels="true" showTickMarks="true">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </Slider>
+                        <Separator prefWidth="100.0">
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                        </Separator>
+                        <ToggleButton fx:id="protractorBtn" layoutX="10.0" layoutY="316.0" minHeight="25.0" minWidth="50.0" mnemonicParsing="false" onAction="#handleOnActionProtractorBtn">
+                           <graphic>
+                              <ImageView fitHeight="49.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/Protractor-icon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </ToggleButton>
+                     </children>
+                  </VBox>
+               </items>
+            </ToolBar>
+            <ScrollPane fx:id="map_scrollpane" fitToHeight="true" fitToWidth="true" hbarPolicy="ALWAYS" minHeight="0.0" minWidth="0.0" onMouseMoved="#muestraPosicion" pannable="true" prefHeight="398.0" prefWidth="358.0" vbarPolicy="ALWAYS">
+               <content>
+                  <Pane fx:id="zoom" onMouseClicked="#handleOnActionClickedMouse" onMouseDragged="#handleOnActionDraggedMouse" onMousePressed="#handleOnActionPressMouse" onMouseReleased="#handleOnActionReleaseMouse" prefHeight="1052.0" prefWidth="1652.0">
+                     <children>
+                        <ImageView fitHeight="3204.0" fitWidth="4945.0" layoutX="-1.0" layoutY="-1.0" onMousePressed="#handleOnActionMousePressed" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/carta_nautica.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView id="tran" fx:id="tran" fitHeight="280.0" fitWidth="248.0" onMouseDragged="#trandragged" onMousePressed="#handleOnActionMousePressed" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@../resources/transportador.png" />
+                           </image>
+                        </ImageView>
+                        <MenuButton fx:id="map_pin" mnemonicParsing="false" prefHeight="60.0" prefWidth="48.0" visible="false">
+                           <items>
+                              <MenuItem fx:id="pin_info" mnemonicParsing="false" text="Action 1" />
+                           </items>
+                           <styleClass>
+                              <String fx:value="menu-button" />
+                              <String fx:value="map-pin" />
+                           </styleClass>
+                        </MenuButton>
+                        <Text layoutX="75.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: paint;" text="Text" />
+                     </children>
+                  </Pane>
+               </content>
+            </ScrollPane>
+         </items>
+      </SplitPane>
+      <HBox alignment="CENTER_RIGHT">
+         <children>
+            <Text fx:id="infoLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="Information: ">
+               <HBox.margin>
+                  <Insets right="180.0" />
+               </HBox.margin>
+            </Text>
+            <Text fx:id="userTextMapa" fill="#1871d0" strokeType="OUTSIDE" strokeWidth="0.0">
+               <HBox.margin>
+                  <Insets right="160.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Text>
+            <Label fx:id="coordinatesLabel" minHeight="-Infinity" minWidth="-Infinity" text="SceneX:     SceneY:     " wrapText="true" HBox.hgrow="ALWAYS" />
+         </children>
+         <VBox.margin>
+            <Insets bottom="12.0" right="12.0" top="6.0" />
+         </VBox.margin>
+      </HBox>
+   </children>
+</VBox>
